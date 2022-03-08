@@ -17,23 +17,39 @@ function createDivs() {
     for (let row = 1; row <= squareSide; row++) {
         const divRow = document.createElement('div');
         divRow.classList.add('row');
-        const rowClass = document.querySelector('.row');
         container.appendChild(divRow);
 
         for (let collumns = 1; collumns <= squareSide; collumns++) {
             const divCollumns = document.createElement('div');
             divCollumns.classList.add('collumn');
             divRow.appendChild(divCollumns);
+        
+            divCollumns.setAttribute(`style`, `width:${480/squareSide}px;
+            height: ${480/squareSide}px`);
         }
     }
 }
 
 createDivs();
 
+function colorRandom() {
+    return Math.round(Math.random() * 255);
+}
+
+
+
 container.addEventListener('mouseout', e => {
     if (e.target.className !== 'collumn') return;
 
-    e.target.style.cssText = 'background: rgba(0, 0, 0, 0.2);';
+    const r = colorRandom();
+    const g = colorRandom();
+    const b = colorRandom();
+    
+    console.log(e);
+
+
+    e.target.style.cssText += `background: rgba(${r}, ${g}, ${b});`;
+    // e.target.style.cssText += `background: rgba(0, 0, 0, ${a});`;
 });
 
 button.addEventListener('click', e => {

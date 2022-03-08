@@ -1,7 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
 h1 {
     text-align: center;
 }
@@ -18,20 +14,15 @@ button {
 
 .container {
     align-items: center;
-    width: max-content;
-    height: max-content;
+    width: 480px;
+    height: 480px;
     margin: 0 auto;
-    border: solid black;
+    border: solid rgba(0, 0, 0);
     
 }
 
 .row {
     display: flex;
-    width: 100%;
-    height: 100%;
-}
-
-.collumn {
-    height: 16px;
-    width: 16px;
+    width: max-content;
+    height: max-content;
 }
