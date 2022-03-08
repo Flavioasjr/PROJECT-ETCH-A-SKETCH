@@ -10,7 +10,7 @@ function userSquareSide() {
 function createDivs() {
     let squareSide = userSquareSide();
     while (!squareSide) {
-        alert ('Enter a value less than 100.');
+        alert('Enter a value less than 100.');
         squareSide = userSquareSide();
     }
 
@@ -23,9 +23,9 @@ function createDivs() {
             const divCollumns = document.createElement('div');
             divCollumns.classList.add('collumn');
             divRow.appendChild(divCollumns);
-        
-            divCollumns.setAttribute(`style`, `width:${480/squareSide}px;
-            height: ${480/squareSide}px`);
+
+            divCollumns.setAttribute(`style`, `width:${480 / squareSide}px;
+            height: ${480 / squareSide}px`);
         }
     }
 }
@@ -36,23 +36,36 @@ function colorRandom() {
     return Math.round(Math.random() * 255);
 }
 
-
+let auxClass = 1;
 
 container.addEventListener('mouseout', e => {
-    if (e.target.className !== 'collumn') return;
+    if (e.target.className === 'container') return;
+    
+    //* Black squares:
+    if (e.target.classList.length > 10) {
+        e.target.style.cssText += `background: rgba(0, 0, 0, 1);`;
+        return;
+    }
 
-    const r = colorRandom();
-    const g = colorRandom();
-    const b = colorRandom();
+    auxClass++;
+    e.target.classList.add(`color${auxClass}`);
 
-    e.target.style.cssText += `background: rgba(${r}, ${g}, ${b});`;
-    // e.target.style.cssText += `background: rgba(0, 0, 0, ${a});`;
+    const alpha = (e.target.classList.length - 1) * 0.1;
+
+    e.target.style.cssText += `background: rgba(0, 0, 0, ${alpha});`;
+
+    //* Colored squares:
+    // const red = colorRandom();
+    // const green = colorRandom();
+    // const blue = colorRandom();
+    // e.target.style.cssText += `background: rgba(${red}, ${green}, ${blue});`;
+    
 });
 
 button.addEventListener('click', e => {
     const clearRow = document.querySelectorAll('.row');
 
-    for(div of clearRow){
+    for (div of clearRow) {
         container.removeChild(div);
     }
     createDivs();
