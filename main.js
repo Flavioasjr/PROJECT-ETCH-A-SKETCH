@@ -44,9 +44,6 @@ container.addEventListener('mouseout', e => {
     const r = colorRandom();
     const g = colorRandom();
     const b = colorRandom();
-    
-    console.log(e);
-
 
     e.target.style.cssText += `background: rgba(${r}, ${g}, ${b});`;
     // e.target.style.cssText += `background: rgba(0, 0, 0, ${a});`;
