@@ -37,20 +37,23 @@ function colorRandom() {
 }
 
 let auxClass = 1;
+let alpha;
 
 container.addEventListener('mouseout', e => {
     if (e.target.className === 'container') return;
-    
-    //* Black squares:
-    if (e.target.classList.length > 10) {
+
+    if (!e.target.dataset.mouseout) {
+        e.target.dataset.mouseout = `${auxClass}`;
+    } else {
+        e.target.dataset.mouseout += `${auxClass}`;
+    }
+
+    if (e.target.dataset.mouseout.length >= 10) {
         e.target.style.cssText += `background: rgba(0, 0, 0, 1);`;
         return;
     }
 
-    auxClass++;
-    e.target.classList.add(`color${auxClass}`);
-
-    const alpha = (e.target.classList.length - 1) * 0.1;
+    alpha = e.target.dataset.mouseout.length * 0.1;
 
     e.target.style.cssText += `background: rgba(0, 0, 0, ${alpha});`;
 
@@ -59,7 +62,7 @@ container.addEventListener('mouseout', e => {
     // const green = colorRandom();
     // const blue = colorRandom();
     // e.target.style.cssText += `background: rgba(${red}, ${green}, ${blue});`;
-    
+
 });
 
 button.addEventListener('click', e => {

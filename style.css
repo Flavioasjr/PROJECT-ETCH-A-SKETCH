@@ -18,11 +18,17 @@ button {
     height: 480px;
     margin: 0 auto;
     border: solid rgba(0, 0, 0);
-    
+    background: whitesmoke;
 }
 
 .row {
     display: flex;
     width: max-content;
     height: max-content;
+}
+
+.border {
+    background: red;
+    width: 680px;
+    margin: 0 auto;
 }
