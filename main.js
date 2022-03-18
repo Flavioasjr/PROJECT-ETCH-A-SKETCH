@@ -1,5 +1,8 @@
 const container = document.querySelector('.container');
-const button = document.querySelector('button');
+const btnClear = document.querySelector('.btn-clear');
+const btnColored = document.querySelector('.btn-colored');
+const colorSelection = document.querySelector('.color-selection');
+const btnGray = document.querySelector('.btn-gray');
 
 function userSquareSide() {
     const squareSide = Number(prompt('What number of squares per side?'));
@@ -25,7 +28,7 @@ function createDivs() {
             divRow.appendChild(divCollumns);
 
             divCollumns.setAttribute(`style`, `width:${480 / squareSide}px;
-            height: ${480 / squareSide}px`);
+            height: ${400 / squareSide}px`);
         }
     }
 }
@@ -38,34 +41,39 @@ function colorRandom() {
 
 let auxClass = 1;
 let alpha;
+let checkColor = false;
 
 container.addEventListener('mouseout', e => {
     if (e.target.className === 'container') return;
+    if (e.target.className === 'border') return;
 
-    if (!e.target.dataset.mouseout) {
-        e.target.dataset.mouseout = `${auxClass}`;
-    } else {
-        e.target.dataset.mouseout += `${auxClass}`;
-    }
-
-    if (e.target.dataset.mouseout.length >= 10) {
-        e.target.style.cssText += `background: rgba(0, 0, 0, 1);`;
+    if (!checkColor) {
+        if (!e.target.dataset.mouseout) {
+            e.target.dataset.mouseout = `${auxClass}`;
+        } else {
+            e.target.dataset.mouseout += `${auxClass}`;
+        }
+    
+        if (e.target.dataset.mouseout.length >= 10) {
+            e.target.style.cssText += `background: rgba(0, 0, 0, 1);`;
+            return;
+        }
+    
+        alpha = e.target.dataset.mouseout.length * 0.1;
+    
+        e.target.style.cssText += `background: rgba(0, 0, 0, ${alpha});`;
         return;
     }
 
-    alpha = e.target.dataset.mouseout.length * 0.1;
-
-    e.target.style.cssText += `background: rgba(0, 0, 0, ${alpha});`;
-
     //* Colored squares:
-    // const red = colorRandom();
-    // const green = colorRandom();
-    // const blue = colorRandom();
-    // e.target.style.cssText += `background: rgba(${red}, ${green}, ${blue});`;
+    const red = colorRandom();
+    const green = colorRandom();
+    const blue = colorRandom();
+    e.target.style.cssText += `background: rgba(${red}, ${green}, ${blue});`;
 
 });
 
-button.addEventListener('click', e => {
+btnClear.addEventListener('click', e => {
     const clearRow = document.querySelectorAll('.row');
 
     for (div of clearRow) {
@@ -73,3 +81,13 @@ button.addEventListener('click', e => {
     }
     createDivs();
 });
+
+btnColored.addEventListener('click', e => {
+    checkColor = true;
+    return;
+});
+
+btnGray.addEventListener('click', e => {
+    checkColor = false;
+    return;
+})
